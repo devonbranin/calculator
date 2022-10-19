@@ -1,7 +1,8 @@
 buttonList = document.querySelectorAll("button");
-numList = document.querySelectorAll(".num");
 returnDisplay = document.querySelector('#display');
-clearButton = document.querySelector('#clear')
+clearButton = document.querySelector('#clear');
+backSpace = document.querySelector('.back');
+decimalButton = document.querySelector('.decimal')
 
 let savedValue = 0;
 let firstValue = 0;
@@ -9,11 +10,9 @@ let operation = 0;
 let operationStarted = false;
 let operationsDone = 0
 
-numArray = []
 displayTextArray = []
 
 buttonList.forEach((button) => {
-   // numArray.push(num.textContent);
     button.addEventListener('click', (e) => {
         button.classList.add("pressed");
         console.log(displayTextArray.length);
@@ -41,13 +40,23 @@ buttonList.forEach((button) => {
             displayTextArray = [];
             button.classList.remove("pressed");
         };
-        if (button.classList.contains('pressed') && button.classList.contains('num')) {
+        if (button.classList.contains('disabled')) {
+            return;
+        }
+        if (button.classList.contains('pressed') && button.classList.contains('back')) {
+            let decimalCheck = displayTextArray.pop();
+            if (decimalCheck === '.') {
+                decimalButton.classList.remove('disabled');
+            }
+            updateTextArray();
+            return;
+        }
+        if (button.classList.contains('pressed') && (button.classList.contains('num') || button.classList.contains('decimal'))) {
             displayTextArray.push(button.textContent);
-            storedNumbers = displayTextArray.join('');
-            savedValue = Number(storedNumbers);
-          //  console.log(storedNumbers);
-            displayText(storedNumbers);
-            button.classList.remove("pressed");
+            if (button.textContent === '.') {
+                button.classList.add("disabled");
+            }
+            updateTextArray ();
         };
         if (button.classList.contains('pressed') && button.classList.contains('eql') && operationStarted) {
             performOperation();
@@ -58,6 +67,14 @@ buttonList.forEach((button) => {
         displayText('0');
         clearButton.classList.remove('pressed');
 }})})
+
+function updateTextArray () {
+    storedNumbers = displayTextArray.join('');
+    savedValue = Number(storedNumbers);
+  //  console.log(storedNumbers);
+    displayText(storedNumbers);
+    button.classList.remove("pressed")
+}
 
 function performOperation () {
     if (displayTextArray.length < 1) {
@@ -70,6 +87,8 @@ function performOperation () {
     operationStarted = false;
     displayTextArray = [];
     storedNumbers = 0;
+    disabledButton = document.querySelector('.decimal');
+    disabledButton.classList.remove('disabled');
     operationsDone++;
 }
 
