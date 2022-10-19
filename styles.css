@@ -1,0 +1,60 @@
+#container {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 1fr 4fr 1fr;
+    min-height: 30em;
+    max-width: 15em;
+    margin: 2em;
+    background-color: rgb(246, 226, 242);
+    border-radius: 10px;
+    color: rgb(123, 35, 38);
+    gap: 1em;
+    border: 2px solid rgba(123, 35, 38, 0.423)
+}
+
+button {
+    border-radius: 10px;
+    border: 2px solid rgba(123, 35, 38, 0.423);
+    background-color: rgb(245, 165, 179);
+    color: rgb(123, 35, 38);
+    font-size: 16px;
+}
+
+#display {
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
+    place-self: center;
+    font-size: 24px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#numbercontainer {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: .25em;
+}
+
+#zero {
+    grid-column: 1 / 4;
+    grid-row: 4 / 5;
+}
+
+.num {
+    grid-column: auto;
+    grid-row: auto;
+}
+
+#operationscontainer {
+    grid-column: 2 / 3;
+    grid-row: 2 / 4;
+    display: grid;
+    gap: .25em;
+}
+
+.eql {
+    grid-row: 3 / 4;
+    grid-column: 1 / 2;
+}
